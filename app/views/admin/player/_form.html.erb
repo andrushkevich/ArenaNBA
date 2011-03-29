@@ -1,0 +1,55 @@
+<div class="container" id="container_for_<%= get_form_id(object) %>">
+  <div class="header-container"><div><span><%= title_for_form(object) %></span></div></div>
+  <%= render :partial => 'template/loading', :locals => { :id => get_form_id(object) } %>  
+  <% form_for( symbol_object(object), object, :url => { :action => action, :skip_relative_url_root=>true},    
+    :html => { :class => 'model-form', :id => get_form_id(object), :multipart => true, :target => 'upload_frame' }) do |f| %>
+    <%= hidden_field_tag "item_id", object.id %>
+    <%= f.error_messages %>
+        
+    <p>Team<br/>
+      <%= f.select(:team_id, MyAdmin.get_related_select_options("team_id", object), { :include_blank => true }, :class => "relation" ) %>
+    </p>
+    <p>Weigh<br/>
+      <%= f.text_field :weigh %>
+    </p>
+    <p>Height<br/>
+      <%= f.text_field :height %>
+    </p>
+    <p>Birthday<br/>
+      <%= f.date_select( :birthday, :start_year =>(Date.today.year-45).to_i, :end_year=>(Date.today.year), :default =>{:year =>(Date.today.year-25).to_i} ) %>
+    </p>
+    <p>Player position<br/>
+      <%= f.select(:player_position_id, MyAdmin.get_related_select_options("player_position_id", object), {}, :class => "relation" ) %>
+    </p>
+    <p>First name<br/>
+      <%= f.text_field :first_name %>
+    </p>
+    <p>Last name<br/>
+      <%= f.text_field :last_name %>
+    </p>
+    <p>Image<br/>
+      <%= file_column_field("player", "image_file_column") %>
+    </p>
+    <h2 style="width:150px;">Russian Fields</h2>
+    <a id="show_russian_fields" href="#show_russian_fields" onclick="$('russian_fields').show();$('show_russian_fields').hide();$('hide_russian_fields').show()">Show Russia Fields</a>
+    <a id="hide_russian_fields" href="#hide_russian_fields" onclick="$('russian_fields').hide();$('hide_russian_fields').hide();$('show_russian_fields').show()" style="display:none;">Hide Russian Fields</a>
+    <br/><br/>
+    <div id="russian_fields" style="display:none;">
+      <% fields_for ru_player do |player_ru| %>
+        <%= player_ru.error_messages %>
+        <p>First name<br/>
+          <%= player_ru.text_field :first_name %>
+        </p>
+        <p>Last name<br/>
+          <%= player_ru.text_field :last_name %>
+        </p>
+      <% end %>
+    </div>
+    <div class="btn-line">
+      <%= submit_tag 'Save', :class=>'btn btn-60' %>
+      <input type="button" class="btn btn-60" value="Cancel" onclick="$('container_for_' + '<%= get_form_id(object) %>').remove()"/>
+    </div>
+    <iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
+  <% end  %>  
+  <div class="bottom-container"><div>&nbsp;</div></div>
+</div>        	            

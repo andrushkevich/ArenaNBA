@@ -1,0 +1,37 @@
+<% advanced_search = File.exist?("#{RAILS_ROOT}/app/views/#{params[:controller]}/_advanced_search.html.erb") %>
+<tr class="search" >
+  <td colspan="<%=  columns.size + 1%>" id="search_for_<%= get_id_by_type(type) %>"><span>Quick Search</span><input class="input-text" type="text" name="quick_search" value="<%= session["#{get_id_by_type(type)}_quick_search".to_sym] %>"/>
+    <%= button_to_remote "Search", "btn-lit btn-lit-60", 
+      :submit => "search_for_#{get_id_by_type(type)}", 
+      :url => { :action => 'set_conditions', :skip_relative_url_root=>true},
+      :before => "$('loading_for_#{get_id_by_type(type)}').show()",
+      :complete => "$('loading_for_#{get_id_by_type(type)}').hide()" %>            
+    <%= button_to_remote "Clear", "btn-lit btn-lit-60",
+      :url => { :action => 'clear_conditions', :skip_relative_url_root=>true} -%>
+    <%if advanced_search %>
+      <a id="advanced_link_show_<%=  get_id_by_type(type) %>"  href="#advanced_link_hide_<%=  get_id_by_type(type) %>" <% if session["show_advanced"] %> style="display:none;" <% end %>
+         onclick="$('advanced_search_<%=  get_id_by_type(type) %>').show();$('advanced_link_show_<%=  get_id_by_type(type) %>').hide();$('advanced_link_hide_<%=  get_id_by_type(type) %>').show();">Show advanced</a>
+      <a id="advanced_link_hide_<%=  get_id_by_type(type) %>"  href="#advanced_link_show_<%=  get_id_by_type(type) %>" <% if !session["show_advanced"] %> style="display:none;" <% end %>
+         onclick="$('advanced_search_<%=  get_id_by_type(type) %>').hide();$('advanced_link_hide_<%=  get_id_by_type(type) %>').hide();$('advanced_link_show_<%=  get_id_by_type(type) %>').show();">Hide advanced</a><br/>
+    <% end %>
+  </td>
+</tr>
+<%if advanced_search %>
+  <tr id="advanced_search_<%=  get_id_by_type(type) %>"  <% if !session["show_advanced"] %> style="display:none;" <% end %> >
+      <td colspan="<%=  columns.size + 1%>">
+    <%= render :partial => "advanced_search", :locals => { :type => type } %>
+  </td></tr>
+<% end %>
+<tr class="title">
+  <% columns.each { |column|%>
+    <td>
+      <%= link_to_remote column_name(column),
+      :url => { :action => 'set_order', :skip_relative_url_root=>true},
+      :with => "'column=#{column.name}'",
+      :before => "$('loading_for_#{get_id_by_type(type)}').show()",
+      :complete => "$('loading_for_#{get_id_by_type(type)}').hide()"
+    %>
+    </td>
+  <%}%>
+  <td>Command</td>
+</tr>

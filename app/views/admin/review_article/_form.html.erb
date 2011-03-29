@@ -1,0 +1,26 @@
+<div class="container" id="container_for_<%= get_form_id(object) %>">
+  <div class="header-container"><div><span><%= title_for_form(object) %></span></div></div>
+  <%= render :partial => 'template/loading', :locals => { :id => get_form_id(object) } %>  
+  <% remote_form_for( symbol_object(object), object, :url => { :action => action, :skip_relative_url_root=>true},
+    :loading => "$('loading_for_#{get_form_id(object)}').show();$('loading_for_#{get_id_by_type(object.class)}').show()",
+    :success => "$('loading_for_#{get_form_id(object)}').hide();$('loading_for_#{get_id_by_type(object.class)}').hide()",
+    :html => { :class => 'model-form', :id => get_form_id(object), :multipart => true, :target => 'upload_frame' }) do |f| %>
+    <%= hidden_field_tag "article_id", object.id %>
+    <%= f.error_messages %>
+    <p>Article<br/>
+      <%= f.select("article_id", MyAdmin.get_related_select_options("article_id", object, (session["cond_date"])?("game_id in ( select id from games where date = '#{session["cond_date"]}')"):(nil), "id DESC"), { :include_blank => true }, :class => "relation") %>
+    </p>
+    <%= observe_field 'article_players_real_rate_article_id',
+      :update => 'team_players_container',
+      :url    => { :action => 'get_players' },
+      :with   => 'article_players_real_rate_article_id' %>
+    <%=  render :partial => "article_content", :locals => { :language => "English", :item => en_article } %>
+    <%=  render :partial => "article_content", :locals => { :language => "Russian", :item => ru_article } %>
+    <%= render :partial => "players_container", :locals => { :guest_players => guest_players, :home_players => home_players, :players_rate => players_rate} %>      
+    <div class="btn-line">
+      <%= submit_tag 'Save', :class=>'btn btn-60' %>
+      <input type="button" class="btn btn-60" value="Cancel" onclick="$('container_for_' + '<%= get_form_id(object) %>').remove()"/>
+    </div>    
+  <% end  %>  
+  <div class="bottom-container"><div>&nbsp;</div></div>
+</div>        	            

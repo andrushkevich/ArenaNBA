@@ -1,0 +1,46 @@
+<% index = (( @page_num - 1 ) * 30) + 1 %>
+<div class="content">  
+  <div class="rate_head"><h1><%= @lang.abbreviation == 'ru' ? "Рейтинг" : "Rate" %></h1></div>  
+  <div class="team_scores_div">
+    <table class="scores_table">
+      <tbody><tr>          
+          <td>
+            <table class="t_team_scores_nums">
+              <tbody><tr>
+                  <td class="team_gray">&nbsp;</td>
+                  <td class="pl_team_col_gray"><span class="s_head"><%= @lang.abbreviation == 'ru' ? "Игрок" : "Player's Name" %></span></td>
+                  <td class="team_gray"><span class="s_head"><%= @lang.abbreviation == 'ru' ? "Команда" : "Team" %></span></td>
+                <td class="team_gray"><span class="s_head"><%= @lang.abbreviation == 'ru' ? "Рейтинг" : "Points" %></span></td></tr>
+                <% @rates.each{ |rate| %>
+                <tr>
+                  <td><span class="nums"><%= index %></span></td>
+                  <td><a class="player_game_link" title="<%=  rate.player.current_to_label(@lang) %>" href="http://<%=  request.host%>/<%=  @lang.abbreviation%>/<%= rate.player[:id]  %>/player.html"><span class="nums"><%= rate.player.current_to_label(@lang) %></span></a></td>
+                  <td><a class="player_game_link" title="<%= rate.player.team.current_name(@lang) %>" href="http://<%=request.host%>/<%=@lang.abbreviation%>/<%= rate.player.team[:id] %>/team.html"><span class="nums"><%= rate.player.team.current_name(@lang) %></span></a></td>
+                  <td><span class="nums"><%= rate.score %></span></td>                  
+                </tr>
+                <% index += 1 %>
+                <%  } %>                     
+            </tbody></table>                                                
+          </td>
+        </tr>    
+    </tbody></table>
+  </div>
+  <% if @page_total > 1 %>
+  <div class="num_pages">
+    <ul class="pages">
+      <% index = 1 %>
+      <% @page_total.times{ %>
+        <li>
+          <% if index != @page_num %>
+            <a href="http://<%=  request.host%>/<%= @lang.abbreviation %>/<%= params[:type] %>/rate.html?page_num=<%= index %>" title="page <%= index %>" class="matches"><%= index %></a>
+          <% else %>
+            <span style="color:#FFFFFF;"><%= index %></span>
+          <% end %>
+        </li>
+        <% index += 1 %>
+      <% } %>      
+    </ul>
+  </div>
+  <% end %>
+  <div class="empty1"> </div>  
+</div>

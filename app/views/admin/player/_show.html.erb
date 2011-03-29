@@ -1,0 +1,34 @@
+<div class="container" id="container_for_<%= get_form_id(object) %>">
+  <div class="header-container"><div><span><%= title_for_form(object) %></span></div></div>
+  <%= render :partial => 'template/loading', :locals => { :id => get_form_id(object) } %>
+  <% remote_form_for symbol_object(object), object, :url => { :action => 'edit', :skip_relative_url_root=>true},
+    :before => "$('loading_for_#{get_form_id(object)}').show()",
+    :complete => "$('loading_for_#{get_form_id(object)}').hide()",
+    :html => { :class => 'model-form', :id => get_form_id(object) }do |f| %>
+    <%= hidden_field_tag get_id_by_type(object.class), object.id %>
+    <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <%end%>
+    <% object_attributes(object,'show').each{|key| %>
+      <p><%= label(symbol_object(object), object.type.columns_hash[key.to_s].name) -%>:<br/>
+        <span><%= format_value object, key.to_s %></span>
+      </p>            
+    <% } %>
+    <h2 style="width:150px;">Russian Fields</h2>
+    <a id="show_russian_fields" href="#show_russian_fields" onclick="$('russian_fields').show();$('show_russian_fields').hide();$('hide_russian_fields').show()">Show Russia Fields</a>
+    <a id="hide_russian_fields" href="#hide_russian_fields" onclick="$('russian_fields').hide();$('hide_russian_fields').hide();$('show_russian_fields').show()" style="display:none;">Hide Russian Fields</a>
+    <br/><br/>
+    <div id="russian_fields" style="display:none;">
+      <% object_attributes(ru_player,'show').each{|key| %>
+      <p><%= label(symbol_object(ru_player), ru_player.type.columns_hash[key.to_s].name) -%>:<br/>
+        <span><%= format_value ru_player, key.to_s %></span>
+      </p>            
+    <% } %>
+    </div>
+    <div class="btn-line">
+      <%= submit_tag 'Edit', :class=>'btn btn-60' %>
+      <input type="button" class="btn btn-60" value="Cancel" onclick="$('container_for_' + '<%= get_form_id(object) %>').remove();"/>
+    </div>    
+  <% end  %>
+  <div class="bottom-container"><div>&nbsp;</div></div>
+</div>        	            

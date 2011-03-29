@@ -1,0 +1,14 @@
+<%  guest_team = @article_item.article.game.team_guest %>
+<%  home_team = @article_item.article.game.team_home %>
+<div class="match_players_div">
+  <table class="match_players_table">    
+    <tbody><tr>                                            	                                                
+        <td class="td_top">
+          <%= render :partial => "player_rate_team", :locals =>  { :team => guest_team}  %>
+        </td>        
+        <td class="td_top">
+          <%= render :partial => "player_rate_team", :locals =>  { :team => home_team}  %>
+        </td>
+      </tr>    
+  </tbody></table>
+</div>

@@ -1,0 +1,59 @@
+.empty0
+{
+    width:140px;
+}
+
+.lang_en
+{
+    width:62px;
+}
+
+*a{position:relative !important;}
+
+.c_bg_0
+{
+    FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://arenanba.com/images/Front/c_bg_0.png",sizingMethod="scale");
+    background: transparent;    
+}
+
+.bg_borders_800
+{
+    FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://arenanba.com/images/Front/bg_borders_800.png",sizingMethod="scale");
+    background: transparent;
+}
+
+.c_bg_1
+{
+    FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://arenanba.com/images/Front/c_bg_1.png",sizingMethod="scale");
+    background: transparent;
+}
+
+.c_bg_2
+{
+    FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://arenanba.com/images/Front/c_bg_2.png",sizingMethod="scale");
+    background: transparent;
+}
+
+.r_bg_0
+{
+    FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://arenanba.com/images/Front/r_bg_0.png",sizingMethod="scale");
+    background: transparent;
+}
+
+.r_bg_2
+{
+    FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://arenanba.com/images/Front/r_bg_2.png",sizingMethod="scale");
+    background: transparent;
+}
+
+.r_bg_0
+{
+    FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://arenanba.com/images/Front/r_bg_0.png",sizingMethod="scale");
+    background: transparent;
+}
+
+.pngs
+{
+    FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://arenanba.com/images/Front/ball.png",sizingMethod="scale");
+    background: transparent;
+}

@@ -1,0 +1,16 @@
+<div class="r_bg_0">&nbsp;</div>
+<div class="r_title_item">
+  <%if @lang.abbreviation.downcase == "ru"%>
+  <p>Матчи</p>
+  <%else%>
+  <p>Matches</p>
+  <%end%>
+</div>
+<div class="match_list">
+    <ul class="list_matches">
+        <% for game in games %>
+          <li><div class="r_item"><p><%= link_for_related(game, @article_item.article.game[:id])%></p></div></li>
+        <% end %>                                
+    </ul>
+</div>
+<div class="r_bg_2">&nbsp;</div>

@@ -1,0 +1,4 @@
+<div id="players_container">
+  <%= render :partial => "team_players", :locals => { :team_type => "Guest", :items => guest_players, :players_rate => players_rate} %>
+  <%= render :partial => "team_players", :locals => { :team_type => "Home", :items => home_players, :players_rate => players_rate} %>
+</div>

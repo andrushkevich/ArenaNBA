@@ -1,0 +1,28 @@
+<% if items.size > 0 %>
+  <%items.each{|item|%>
+    <tr>
+      <% columns.each { |column|%><td><%= format_value item, column.name %></td><%}%>
+      <td class="command">
+        <%= link_to_remote "<img src=\"/../images/admin/i_edit.png\" alt=\"edit\" />",
+          :update => "index_container",
+          :url => { :action => 'edit', :skip_relative_url_root=>true},
+          :with =>  "'item_id=#{item.id}'",
+          :position => "before" %>
+        <%= link_to_remote "<img src=\"/../images/admin/i_view.png\" alt=\"view\" />",
+          :update => "index_container",
+          :url => { :action => 'show', :skip_relative_url_root=>true},
+          :with =>  "'item_id=#{item.id}'",
+          :position => "before" %>
+        <%= link_to_remote "<img src=\"/../images/admin/i_delete.png\" alt=\"delete\" />",
+          :url => { :action => 'delete', :skip_relative_url_root=>true},
+          :with =>  "'item_id=#{item.id}'",
+          :method => :delete,
+          :before => "$('loading_for_#{get_id_by_type(item.class)}').show()",
+          :complete => "$('loading_for_#{get_id_by_type(item.class)}').hide()",
+          :condition  => "confirm('Are you sure, you wish to delete this item ?')" %>        
+      </td>
+    </tr>
+  <%}%>
+<% else %>
+  <tr><td colspan="<%= get_list_columns(type).size + 1 %>" style="text-align:center;height:25px;">*****&nbsp;&nbsp;There are no items.&nbsp;&nbsp;*****</td></tr>
+<% end %>

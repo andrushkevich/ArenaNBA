@@ -1,0 +1,10 @@
+<%= render :partial => 'template/loading', :locals => { :id => get_id_by_type(type)} %>
+<div id="list_<%= get_id_by_type(type)%>">
+  <div class="header-container"><div><span><%= title_for_list(type) %></span></div></div>
+  <table id="table_<%= get_id_by_type(type) %>" class="list" cellpadding="0" cellspacing="0">
+    <%= render :partial => 'template/table_header', :locals =>{ :columns => get_list_columns(type), :type => type} %>
+    <%= render :partial => 'template/table_content', :locals =>{ :columns => get_list_columns(type), :type => type, :items => items } %>
+    <%= render :partial => 'template/table_bottom', :locals =>{ :type => type, :paginator => paginator } %>
+  </table>
+  <div class="bottom-container"><div>&nbsp;</div></div>
+</div>

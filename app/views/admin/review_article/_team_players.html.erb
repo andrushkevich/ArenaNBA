@@ -1,0 +1,12 @@
+<% if items %>
+   <% type = team_type.downcase %>
+  <h2 style="width:150px;"><%= team_type %> Team</h2>
+  <a id="show_<%= type %>" href="#team_<%= type %>" onclick="$('team_<%= type %>').show();$('hide_<%= type %>').show();$('show_<%= type %>').hide();">Show Players</a>
+  <a id="hide_<%= type %>" href="#team_<%= type %>" style="display:none;" onclick="$('team_<%= type %>').hide();$('show_<%= type %>').show();$('hide_<%= type %>').hide();">Hide Players</a>
+  <div id="team_<%= type %>" style="display:none;">
+    <% items.each{ |item| %><p><%= item.to_label.upcase %><br/>
+      score&nbsp;<%= text_field "team_#{type}[#{item.id.to_s }]", "score", :style => "min-width:50px;", :value => "#{(players_rate[item.id])?(players_rate[item.id].real_rate):("")}" %>&nbsp;&nbsp;minuts&nbsp;<%= text_field "team_#{type}[#{item.id.to_s }]", "minute", :style => "min-width:50px;" , :value => "#{(players_rate[item.id])?(players_rate[item.id].real_time):("")}" %></p>
+    <%  } %>
+  </div>
+  <br/><br/>  
+<% end %>

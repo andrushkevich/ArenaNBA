@@ -1,0 +1,56 @@
+<% over_time = game.total_over_time_guest && game.total_over_time_home %>
+<div class="scores_div">
+  <table class="scores_table">
+    <tr>
+      <td class="team_logo"><a href="http://<%=request.host%>/<%=@lang.abbreviation%>/<%= game.team_guest[:id] %>/team.html" title="<%= game.team_guest.current_name(@lang) %>"><%= image_tag url_for_image_column(game.team_guest,"image_file_column",:name=>"thumb"), :height=>"55", :width=>"58" %></a></td>
+      <td>
+        <table class="scores_nums">
+          <%  if game.edge && !game.total_home && is_index %>
+            <tr>
+              <td class="attention_td" colspan="<%= over_time ? 7 : 6 %>"><%= @lang.abbreviation == 'ru' ? "Обратите внимание!!!" : "Pay attention!!!"%></td>
+            </tr>
+          <%end%>
+          <tr>
+            <td class="team_col_gray"><span class="s_head"><% if @lang.abbreviation == 'en'%>Team<%else%>Команда<%end%></span></td>
+            <td class="team_gray"><span class="s_head">1</span></td>
+            <td class="team_gray"><span class="s_head">2</span></td>
+            <td class="team_gray"><span class="s_head">3</span></td>
+            <td class="team_gray"><span class="s_head">4</span></td>
+            <%  if over_time %>
+              <td class="team_gray"><span class="s_head">TO</span></td>
+            <% end %>
+            <td class="team_gray"><span class="s_head">T</span></td>
+          </tr>
+          <tr>
+            <td class="team_col"><h1 class="scores_team"><%= TeamItem.find_by_language_id_and_team_id(@lang.id, game.team_guest.id).name %></h1></td>
+            <td><span class="nums"><%= game.period_first_guest || "-"%></span></td>
+            <td><span class="nums"><%= game.period_second_guest || "-"%></span></td>
+            <td><span class="nums"><%= game.period_third_guest || "-"%></span></td>
+            <td><span class="nums"><%= game.period_fourth_guest || "-"%></span></td>
+            <% if over_time %>
+              <td><span class="nums"><%= game.total_over_time_guest%></span></td>
+            <% end %>
+            <td><span class="nums"><%= game.total_guest || "-"%></span></td>
+          </tr>
+          <tr>
+            <td class="team_col"><h1 class="scores_team"><%= TeamItem.find_by_language_id_and_team_id(@lang.id, game.team_home.id).name %></h1></td>
+            <td><span class="nums"><%= game.period_first_home || "-"%></span></td>
+            <td><span class="nums"><%= game.period_second_home || "-"%></span></td>
+            <td><span class="nums"><%= game.period_third_home || "-"%></span></td>
+            <td><span class="nums"><%= game.period_fourth_home || "-"%></span></td>
+            <% if over_time %>
+              <td><span class="nums"><%= game.total_over_time_home%></span></td>
+            <% end %>
+            <td><span class="nums"><%= game.total_home || "-"%></span></td>
+          </tr>
+        </table>
+      </td>
+      <td class="team_logo"><a href="http://<%=request.host%>/<%=@lang.abbreviation%>/<%= game.team_home[:id] %>/team.html" title="<%= game.team_home.current_name(@lang) %>"><%= image_tag url_for_image_column(game.team_home,"image_file_column",:name=>"thumb"), :height=>"55", :width=>"58" %></a></td>
+    </tr>
+    <tr>
+      <td><%= score_sum_tag(game, false)%></td>
+      <td class="td_link"><%= link_for_article(game, is_index) %></td>
+      <td><%= score_sum_tag(game, true)%></td>
+    </tr>
+  </table>
+</div>

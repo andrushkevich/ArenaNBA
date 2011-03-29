@@ -1,0 +1,22 @@
+<div class="container" id="container_for_<%= get_form_id(object) %>">
+  <div class="header-container"><div><span><%= title_for_form(object) %></span></div></div>
+  <%= render :partial => 'template/loading', :locals => { :id => get_form_id(object) } %>  
+  <% remote_form_for( symbol_object(object), object, :url => { :action => action, :skip_relative_url_root=>true},
+    :loading => "$('loading_for_#{get_form_id(object)}').show();$('loading_for_#{get_id_by_type(object.class)}').show()",
+    :success => "$('loading_for_#{get_form_id(object)}').hide();$('loading_for_#{get_id_by_type(object.class)}').hide()",
+    :before => fckeditor_before_js(object, 'content_of_page'),
+    :html => { :class => 'model-form', :id => get_form_id(object), :multipart => true, :target => 'upload_frame' }) do |f| %>
+    <%= hidden_field_tag "item_id", object.id %>
+    <%= f.error_messages %>
+    <% object_attributes(object, action).each {|key| %>
+      <p><%= label symbol_object(object), key -%><br/>
+        <%= attributes_tag(f, object, key, true) %>
+      </p>          
+    <% } %>
+    <div class="btn-line">
+      <%= submit_tag 'Save', :class=>'btn btn-60' %>
+      <input type="button" class="btn btn-60" value="Cancel" onclick="$('container_for_' + '<%= get_form_id(object) %>').remove()"/>
+    </div>    
+  <% end  %>  
+  <div class="bottom-container"><div>&nbsp;</div></div>
+</div>        	            

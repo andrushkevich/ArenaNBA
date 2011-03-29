@@ -1,0 +1,6 @@
+Sitemap: http://www.arenanba.com/sitemap.xml
+
+User-agent: *
+Disallow: /admin/
+Disallow: /arenanba/public/admin/
+Disallow: /arenanba_live/

@@ -1,0 +1,29 @@
+<%= render :partial => "current_date" %>
+<div class="menu">  
+  <ul class="list_menu">
+    <li><%= link_for_button(ArticleType.find_by_id(1))%></li>
+    <li><%= link_for_button(ArticleType.find_by_id(2))%></li>
+  </ul>
+</div>
+<div class="content">
+  <ul class="list_scores">
+    <li><%= render(:partial => "game_score" , :locals => {:game=>@article_item.article.game, :is_index=>false}) %></li>
+  </ul>
+  <div class="text_block">
+    <%= @article_item.text || '&nbsp;'%>
+    <% if @article_item.article.game.difference && @article_item.article_type == ArticleType.find_by_id(1) %>
+      <br/>
+      <div>
+        <span class="matchup"><%= @lang.abbreviation == 'ru' ? "Прогноз" : "Matchup"%>:&nbsp;&nbsp;&nbsp;</span>
+        <%= image_tag url_for_image_column( ( @article_item.article.game.winner_type_id == 1 ) ? (@article_item.article.game.team_home):(@article_item.article.game.team_guest),"image_file_column",:name=>"thumb"), :height=>"55", :width=>"58" %>
+        <span class="matchup">&nbsp;&nbsp;&nbsp;<%= @article_item.article.game.difference %></span>
+        <% if @article_item.article.game.edge && !@article_item.article.game.total_home %>
+          <span class="attention_span"><%= @lang.abbreviation == 'ru' ? "( Обратите внимание!!! )" : "( Pay Attention!!! )" %></span>
+        <% end %>
+      </div>
+      <br/><br/>
+    <% end  %>
+  </div>
+  <%= render :partial => "player_rate_container" %>
+</div>
+

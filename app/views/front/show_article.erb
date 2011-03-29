@@ -1,0 +1,17 @@
+<div class="menu">
+    <ul class="list_menu">
+        <li><%= link_for_button(ArticleType.find_by_id(2))%></li>
+        <li><%= link_for_button(ArticleType.find_by_id(3))%></li>
+        <li><%= link_for_button(ArticleType.find_by_id(1))%></li>
+    </ul>
+</div>
+<div class="content">
+  <% if @article_type != ArticleType.find_by_id(3)%>
+  <ul class="list_scores">
+    <li><%= render(:partial => "game_score" , :locals => {:game=>@game, :is_index=>false}) %></li>
+  </ul>
+  <% end %>
+  <div class="text_block">
+    <%= @article_item.text || '&nbsp;'%>
+  </div>
+</div>

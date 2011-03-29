@@ -1,0 +1,9 @@
+<tr class="paging"><td colspan="<%= get_list_columns(type).size %>">
+    <%= Paginator::AdminPaginator.paginate(paginator, self) %>
+  </td>
+  <td class="command"><%= link_to_remote "<img src=\"/../images/admin/i_add.png\" alt=\"edit\" title=\"Add\"/>",
+      :update => "index_container",
+      :url => { :action => "create_new_item", :skip_relative_url_root=>true },
+      :position => "before" %>
+  </td>
+</tr>

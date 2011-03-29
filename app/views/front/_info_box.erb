@@ -1,0 +1,12 @@
+<% page_method =  params[:action] == 'show_article' ? 'show_article_' + params[:article_type] : params[:action]%>
+<% information = Information.page_info(page_method, @lang) %>
+<% if information %>
+<div class="c_bg_0">&nbsp;</div>
+<div class="c_bg_1">
+  <div class="info_box">
+    <h3 class="info_box_title" ><%= @lang.abbreviation == 'ru' ? "Информация" : "Information" %></h3>
+    <div class="text_block"><%= information.title %></div>
+  </div>
+</div>
+<div class="c_bg_2">&nbsp;</div>
+<% end %>

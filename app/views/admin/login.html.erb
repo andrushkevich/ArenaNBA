@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Login form for administrative tools</title>
+    <%= stylesheet_link_tag "admin" %>
+  </head>  
+  <body>
+    <div class="main-container">
+      <div style="margin:0px auto;width:400px;padding-top:130px;">
+        <div class="header-container"><div><span>Please login</span></div></div>
+        <% form_tag 'login', :class=> "model-form" do %>
+                <% if flash[:notice] %>
+                <div class="errorExplanation"><%= flash[:notice] %></div>
+                <% end %>
+                <p>
+                    <label for="email" >Name:</label><br/>
+                        <%= text_field_tag :email, params[:email] %>
+                </p>
+                <p>
+                    <label for="password" >Password:</label><br/>
+                    <%= password_field_tag :password, params[:password] %>
+                </p>
+                <div class="btn-line">
+                    <%= submit_tag "Login", :class=>'btn btn-60' %>
+                </div>
+                <% end %>
+        <div class="bottom-container"><div>&nbsp;</div></div>
+      </div>
+    </div>
+  </body>
+</html>

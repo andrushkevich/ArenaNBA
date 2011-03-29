@@ -1,0 +1,2 @@
+module Admin::WinnerTypesHelper
+end

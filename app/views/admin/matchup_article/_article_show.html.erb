@@ -1,0 +1,19 @@
+<%  lang = language.downcase %>
+<h2 style="width:150px;"><%= language %> Content</h2>
+<p>Text<br/>
+  <span><%= item.text %></span>
+</p>
+<a id="show_meta_fields_<%= lang %>" href="#show_meta_fields_<%= lang %>" onclick="$('meta_fields_<%= lang %>').show();$('show_meta_fields_<%= lang %>').hide();$('hide_meta_fields_<%= lang %>').show()">Show Meta Fields</a>
+<a id="hide_meta_fields_<%= lang %>" href="#hide_meta_fields_<%= lang %>" onclick="$('meta_fields_<%= lang %>').hide();$('hide_meta_fields_<%= lang %>').hide();$('show_meta_fields_<%= lang %>').show()" style="display:none;">Hide Meta Fields</a>
+<br/><br/>
+<div id="meta_fields_<%= lang %>" style="display:none;">
+  <p>Meta Description<br/>
+    <span><%= item.meta_description %></span>
+  </p>
+  <p>Meta Keywords<br/>
+    <span><%= item.meta_keywords %></span>
+  </p>
+  <p>Meta Title<br/>
+    <span><%= item.meta_title %></span>
+  </p>
+</div>

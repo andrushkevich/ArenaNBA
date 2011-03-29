@@ -1,0 +1,8 @@
+<ul class="list_teams">
+  <%  teams.each{ |team|%>
+  <li>
+    <div class="team_pic_small"><%= image_tag url_for_image_column(team,"image_file_column",:name=>"thumb"), :height=>"55", :width=>"58" %></div>
+    <div class="team_name"><a href="http://<%=request.host%>/<%=@lang.abbreviation%>/<%= team[:id] %>/team.html" title="<%= team.current_name(@lang) %>" class="team_list_link"><%= name_of_team(team) %></a></div>
+  </li>
+  <% } %>
+</ul>

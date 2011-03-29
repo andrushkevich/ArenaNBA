@@ -1,0 +1,56 @@
+base_url = "http://www.arenanba.com"
+xml.instruct! :xml, :version=>"1.0"
+xml.tag! 'urlset', "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
+  for article in @article_item do
+    xml.tag! 'url' do
+      xml.tag! 'loc', "#{base_url}/#{Language.find(article.language_id).abbreviation}/#{ArticleType.find(article.article_type_id).name}/#{Article.find(article.article_id).game.id}"
+      xml.tag! 'lastmod', "#{Article.find(article.article_id).game.date.strftime("%Y-%m-%d")}"
+      xml.tag! 'changefreq', 'never'
+      xml.tag! 'priority', '0.8'
+    end    
+  end
+  for lang in @language do
+    xml.tag! 'url' do
+      xml.tag! 'loc', "#{base_url}/#{lang.abbreviation}/"
+      xml.tag! 'lastmod', "#{DateTime.now.strftime("%Y-%m-%d")}"
+      xml.tag! 'changefreq', 'daily'
+      xml.tag! 'priority', '1'
+    end    
+  end
+  for content in @content do
+    xml.tag! 'url' do
+      xml.tag! 'loc', "#{base_url}/#{Language.find(content.language_id).abbreviation}/static/#{content.url}"
+      xml.tag! 'lastmod', "#{content.updated_at.strftime("%Y-%m-%d")}"
+      xml.tag! 'changefreq', 'monthly'
+      xml.tag! 'priority', '1'
+    end    
+  end
+  date = @start_date
+  while (date <= DateTime.now)
+    for lang in @language do
+      xml.tag! 'url' do
+        xml.tag! 'loc', "#{base_url}/#{lang.abbreviation}/#{date.month}/#{date.day}/#{date.year}"
+        xml.tag! 'lastmod', "#{date.year}-#{date.month}-#{date.day}"
+        xml.tag! 'changefreq', 'yearly'
+        xml.tag! 'priority', '1'
+      end    
+    end
+    date = date + 1
+  end
+  for lang in @language do
+    for team in @teams do    
+      xml.tag! 'url' do
+        xml.tag! 'loc', "#{base_url}/#{lang.abbreviation}/#{team[:id]}/team.html"
+        xml.tag! 'changefreq', 'weekly'
+        xml.tag! 'priority', '0.8'
+      end
+    end
+    for player in @players do
+      xml.tag! 'url' do
+        xml.tag! 'loc', "#{base_url}/#{lang.abbreviation}/#{player[:id]}/player.html"
+        xml.tag! 'changefreq', 'weekly'
+        xml.tag! 'priority', '0.8'
+      end
+    end
+  end
+  end

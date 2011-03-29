@@ -1,0 +1,2 @@
+module Admin::TeamDivisionHelper
+end

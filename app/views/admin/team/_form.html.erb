@@ -1,0 +1,20 @@
+<div class="container" id="container_for_<%= get_form_id(object) %>">
+  <div class="header-container"><div><span><%= title_for_form(object) %></span></div></div>
+  <%= render :partial => 'template/loading', :locals => { :id => get_form_id(object) } %>  
+  <% form_for( symbol_object(object), object, :url => { :action => action, :skip_relative_url_root=>true},    
+    :html => { :class => 'model-form', :id => get_form_id(object), :multipart => true, :target => 'upload_frame' }) do |f| %>
+    <%= hidden_field_tag "item_id", object.id %>
+    <%= f.error_messages %>
+    <% object_attributes(object, action).each {|key| %>
+      <p><%= label symbol_object(object), key -%><br/>
+        <%= attributes_tag(f, object, key) %>
+      </p>            
+    <% } %>
+    <div class="btn-line">
+      <%= submit_tag 'Save', :class=>'btn btn-60' %>
+      <input type="button" class="btn btn-60" value="Cancel" onclick="$('container_for_' + '<%= get_form_id(object) %>').remove()"/>
+    </div>
+    <iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
+  <% end  %>  
+  <div class="bottom-container"><div>&nbsp;</div></div>
+</div>        	            

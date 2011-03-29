@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Administrative tools</title>
+    <%= stylesheet_link_tag "admin" %>
+    <%= stylesheet_link_tag "paginator3000"  %>
+    <%= javascript_include_tag 'prototype' %>
+    <%= javascript_include_tag 'paginator3000' %>
+  </head>  
+  <body>
+    <div class="main-container">&nbsp;
+      <div class="header">
+        <div class="header_left">&nbsp;</div>
+        <div class="header-right">
+          <div class="logout"><%= link_to "Logout" , :action => "logout", :skip_relative_url_root=>true %></div>
+          <div class="header-title">
+            <div class="first-row">Wellcome to ArenaNBA</div>
+            <div class="second-row">Administration</div>
+          </div>
+        </div>            
+      </div>
+      <%= render :partial => 'template/menu' %>
+      <div class="content">
+        <%= yield  %>        
+      </div>
+    </div>
+  </body>
+</html>

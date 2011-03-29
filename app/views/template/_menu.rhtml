@@ -1,0 +1,43 @@
+<div class="menu-list">
+  <div class="menu">
+    <div class="menu-header"><span>Users Management</span><div class="command">&nbsp;</div></div>
+    <ul>
+      <li><%= link_to "Users Management" , :controller=> "admin/user", :skip_relative_url_root=>true %></li>
+      <li><%= link_to "User Type Management" , :controller=> "admin/user_type", :skip_relative_url_root=>true %></li>
+    </ul>
+  </div>
+  <div class="menu">
+    <div class="menu-header"><span>Teams Management</span><div class="command"></div></div>
+    <ul>
+      <li><%= link_to "Team Management" , :controller=> "admin/team", :skip_relative_url_root=>true %></li>
+      <li><%= link_to "Team Items Management" , :controller=> "admin/team_item" , :skip_relative_url_root=>true %></li>
+      <li><%= link_to "Player Management" , :controller=> "admin/player", :skip_relative_url_root=>true %></li>
+      <!--<li><%= link_to "Division Management" , :controller=> "admin/team_division", :skip_relative_url_root=>true %></li>-->
+      <!--<li><%= link_to "Team Type Management" , :controller=> "admin/team_type", :skip_relative_url_root=>true %></li>-->
+    </ul>
+  </div>
+  <div class="menu">
+    <div class="menu-header"><span>Settings Management</span><div class="command"></div></div>
+    <ul>
+      <li><%= link_to "Settings Management" , :controller=> "admin/setting", :skip_relative_url_root=>true %></li>
+      <!--<li><%= link_to "Languages Management" , :controller=> "admin/language", :skip_relative_url_root=>true  %></li>-->
+      <li><%= link_to "Season Management" , :controller=> "admin/season", :skip_relative_url_root=>true  %></li>
+      <li><%= link_to "Contents Management" , :controller=> "admin/content", :skip_relative_url_root=>true  %></li>
+      <li><%= link_to "Colculate NBA Player's Rate" , :controller=> "task/calculate_nba_rate", :skip_relative_url_root => true  %></li>
+      <li><%= link_to "Colculate WNBA Player's Rate" , :controller=> "task/calculate_wnba_rate", :skip_relative_url_root => true  %></li>
+    </ul>
+  </div>
+  <div class="menu">
+    <div class="menu-header"><span>Game & Article</span><div class="command"></div></div>
+    <ul>
+      <!--<li><%= link_to "Winner Management" , :controller=> "admin/winner_type", :skip_relative_url_root=>true  %></li>-->
+      <li><%= link_to "Game Management" , :controller=> "admin/game", :skip_relative_url_root=>true  %></li>
+      <!--<li><%= link_to "Position Management" , :controller=> "admin/player_position", :skip_relative_url_root=>true  %></li>-->
+      <li><%= link_to "Matchup Article" , :controller=> "admin/matchup_article", :skip_relative_url_root=>true  %></li>
+      <li><%= link_to "Review Article" , :controller=> "admin/review_article", :skip_relative_url_root=>true  %></li>
+      <li><%= link_to "Player Game Relation" , :controller=> "admin/player_game", :skip_relative_url_root=>true  %></li>
+      <li><%= link_to "Player's History" , :controller=> "admin/player_team", :skip_relative_url_root=>true  %></li>
+      <li><%= link_to "Comments of Article" , :controller=> "admin/comment", :skip_relative_url_root=>true  %></li>
+    </ul>
+  </div>  
+</div>

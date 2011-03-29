@@ -1,0 +1,76 @@
+<div class="content">  
+  <div class="west_east">    
+    <div class="member_container">      
+      <div class="member_photo"><%= image_tag url_for_image_column(@player,"image_file_column", :name=> "trumb"), :height=>"90", :width=>"65" %></div>
+      <div class="member_bio">
+        <p/><h1><%= @player.current_to_label(@lang) %></h1>
+        <p><span class="s_w_head"><%= @lang.abbreviation == 'ru' ? "Дата рождения":"Birthday" %>:</span> <span class="w_simple"><%= @player.birthday  %></span></p>
+        <p><span class="s_w_head"><%= @lang.abbreviation == 'ru' ? "Рост":"Height" %>:</span> <span class="w_simple"><%= @player.height %></span></p>
+        <p><span class="s_w_head"><%= @lang.abbreviation == 'ru' ? "Вес":"Weight" %>:</span> <span class="w_simple"><%= @player.weigh %></span></p>
+        <p><span class="s_w_head"><%= @lang.abbreviation == 'ru' ? "Позиция":"Position" %>:</span> <span class="w_simple"><%= @player.player_position.name %></span></p>
+        <p></p>
+      </div>      
+      <div class="player_team">
+        <div class="player_pic_container">
+          <div class="team_pic_big"><a href="http://<%=request.host%>/<%=@lang.abbreviation%>/<%= @player.team[:id] %>/team.html" title="<%= @player.team.current_name(@lang) %>"><%= image_tag url_for_image_column(@player.team,"image_file_column",:name=>"")%></a></div>                                		
+        </div>
+      </div>
+    </div>      
+  </div>
+  <% if ( @last5 && @last5.size > 0) %>
+  <div class="team_scores_div">
+    <span class="s_w_head"><%= @lang.abbreviation == 'ru' ? "Среднии оценки":"Average Scores" %>:</span>
+    <table class="scores_table">
+      <tbody><tr><td>
+        <table class="t_team_scores_nums">
+              <tbody>
+                <tr>
+                  <td class="pl_team_col_gray"><span class="s_head"><%= @lang.abbreviation == 'en' ? "Last 5 games":"Последнии 5 игр" %></span></td>
+                  <td class="pl_team_gray"><span class="s_head"><%= @lang.abbreviation == 'en' ? "Last 10 games":"Последнии 10 игр" %></span></td>
+                  <td class="pl_team_gray"><span class="s_head"><%= @lang.abbreviation == 'en' ? "Season":"Сезон" %></span></td>
+                </tr>
+                <tr style="height:50px;">
+                  <td align="center"><div class="match_player_rate" style="height:auto;"><%= render :partial => "stars_score", :locals => { :score => PlayerGame.fron_score_value(@last5[0].rate.to_i), :minute => @last5[0].time.to_i } %></div></td>
+                  <td align="center"><div class="match_player_rate" style="height:auto;"><%= render :partial => "stars_score", :locals => { :score => PlayerGame.fron_score_value(@last10[0].rate.to_i), :minute => @last10[0].time.to_i } %></div></td>
+                  <td align="center"><div class="match_player_rate" style="height:auto;"><%= render :partial => "stars_score", :locals => { :score => PlayerGame.fron_score_value(@all[0].rate.to_i), :minute => @all[0].time.to_i } %></div></td>
+                </tr>
+              </tbody>
+         </table>
+      </td></tr></tbody>
+    </table>
+  </div>
+  <% end %>
+  <div class="team_scores_div">
+    <table class="scores_table">
+      <tbody><tr>
+          <td>
+            <table class="t_team_scores_nums">
+              <tbody><tr>
+                  <td class="pl_team_col_gray"><span class="s_head"><%= @lang.abbreviation == 'ru' ? "Матч":"Match" %></span></td>
+                  <td class="pl_team_gray"><span class="s_head"><%= @lang.abbreviation == 'ru' ? "Оценка игрока":"Player's value" %></span></td>
+                  <td class="pl_team_gray"><span class="s_head"><%= @lang.abbreviation == 'ru' ? "Время":"Time" %></span></td>
+                </tr>
+                <% if @scores && @scores.size > 0 %>
+                  <% @scores.each { |item| %>
+                <tr style="text-align:left;">
+                  <td>
+                    <%= link_for_article(item.game, true, "<span class=\"nums\">#{item.game.to_s(@lang)}</span>", "player_game_link") %>                                          
+                  </td>
+                  <td>
+                    <div class="stars">
+                      <%= render :partial => "stars_score", :locals => { :score => item.get_front_rate(:review), :minute => nil } %>
+                    </div>
+                  </td>
+                  <td><span class="nums"><%= item.real_time %> <%= @lang.abbreviation == 'ru' ? "мин.":"min." %></span></td>                  
+                </tr>
+                <%}%>
+                <% else %>
+                  <tr><td colspan="3"><span class="nums"><%= @lang.abbreviation == 'ru' ? "Список пуст":"The are no matches" %></span></td></tr>
+                <% end %>
+            </tbody></table>                                                
+          </td>
+        </tr>    
+    </tbody></table>
+  </div>  
+  <div class="empty1"> </div> 
+</div>

@@ -1,0 +1,17 @@
+<div class="content">
+  <div class="west_east">
+    <div class="w_e_pic">
+      <div class="west_east_title"><%= @lang.abbreviation == 'ru' ? "Запад" : "West" %></div>
+      <div class="west_east_title"><%= @lang.abbreviation == 'ru' ? "Восток" : "East" %></div>
+    </div>  
+    <div>
+      <div class="west_east_side">
+        <%= render :partial => "team_list", :locals => { :teams => @west_teams} %>
+      </div>
+      <div class="west_east_side">
+        <%= render :partial => "team_list", :locals => { :teams => @east_teams} %>
+      </div>
+    </div>
+  </div>
+  <div class="empty1"> </div>
+</div>

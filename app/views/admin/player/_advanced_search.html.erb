@@ -1,0 +1,13 @@
+<p>Team<br/>
+  <%= select "condition", "team", MyAdmin.get_select_options(Team), :selected => (session["cond_team"] ? session["cond_team"].to_i : session["cond_team"]) %>
+</p>
+<div class="btn-line">
+  <%= button_to_remote "Search", "btn btn-60", 
+      :submit => "advanced_search_#{get_id_by_type(type)}", 
+      :url => { :action => 'set_advanced_conditions', :skip_relative_url_root=>true},
+      :before => "$('loading_for_#{get_id_by_type(type)}').show()",
+      :complete => "$('loading_for_#{get_id_by_type(type)}').hide()" %>            
+    <%= button_to_remote "Clear", "btn btn-60",
+      :url => { :action => 'clear_advanced_conditions', :skip_relative_url_root=>true} -%>
+</div>
+<br/>

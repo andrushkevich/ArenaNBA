@@ -1,0 +1,22 @@
+<table class="match_players_cols">
+  <tbody><tr>
+      <td class="team_logo" colspan="3">	
+      <a href="http://<%=request.host%>/<%=@lang.abbreviation%>/<%= team[:id] %>/team.html" title="<%= team.current_name(@lang) %>"><%= image_tag url_for_image_column(team,"image_file_column",:name=>"thumb"), :height=>"55", :width=>"58" %></a>
+    </tr>              
+    <tr>                                                        
+      <td class="match_players_col_gray" colspan="3"><span><%= (@lang.abbreviation != 'ru')?("Players"):("Игроки") %></span></td>
+    </tr>              
+    <% get_players_rate(team, @article_item).each { |rate|   %>
+      <tr>      
+        <td><a href="http://<%=  request.host%>/<%=  @lang.abbreviation%>/<%= rate.player[:id]  %>/player.html" title="<%= rate.player.current_to_label(@lang) %>">
+            <%= image_tag url_for_image_column(rate.player,"image_file_column", :name=> "trumb"), :height=>"90", :width=>"65" %>
+        </a></td>
+        <td><a href="http://<%=  request.host%>/<%=  @lang.abbreviation%>/<%= rate.player[:id]  %>/player.html" title="<%= rate.player.current_to_label(@lang) %>" class="players_link"><%= rate.player.current_to_label(@lang) %></a></td>
+        <td>
+          <div class="match_player_rate">
+            <%= render :partial => "stars_score", :locals => { :score => rate.get_front_rate(@article_item.article_type.name.to_sym), :minute => (@article_item.article_type.name == 'review' ? rate.real_time : rate.matchup_time ) } %>
+          </div>
+        </td>                                                       	
+      </tr>
+    <% } %>                                                           
+</tbody></table>                                                

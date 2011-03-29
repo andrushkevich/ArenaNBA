@@ -1,0 +1,11 @@
+<a href="http://<%=request.host%>/<%=@lang.abbreviation%>/static/information.html" title="note"><ul class="stars_list">
+    <%  index = 1 %>
+    <%  7.times{%>
+      <li><img height="11" width="11" alt="star" src="/images/Front/star<%=  index <= score ? "" : "_"%>.gif"/></li>
+      <% index+=1 %>
+    <% } %>
+  </ul>
+</a>
+<% if minute %>
+  <%= minute %>&nbsp;<%= @lang.abbreviation == 'ru' ? "мин" : "min" %>
+<% end %>

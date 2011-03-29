@@ -1,0 +1,29 @@
+<div class="container" id="container_for_<%= get_form_id(object) %>">
+  <div class="header-container"><div><span><%= title_for_form(object) %></span></div></div>
+  <%= render :partial => 'template/loading', :locals => { :id => get_form_id(object) } %>
+  <% remote_form_for symbol_object(object), object, :url => { :action => 'edit', :skip_relative_url_root=>true},
+    :before => "$('loading_for_#{get_form_id(object)}').show()",
+    :complete => "$('loading_for_#{get_form_id(object)}').hide()",
+    :html => { :class => 'model-form', :id => get_form_id(object) }do |f| %>
+    <%= hidden_field_tag "article_id", object.id %>
+    <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <%end%>
+    <% object_attributes(object,'show').each{|key| %>
+      <p><%= label(symbol_object(object), object.type.columns_hash[key.to_s].name) -%>:<br/>
+        <span><%= format_value object, key.to_s %></span>
+      </p>            
+    <% } %>
+    <%=  render :partial => "article_show", :locals => { :language => "English", :item => en_article } %>
+    <%=  render :partial => "article_show", :locals => { :language => "Russian", :item => ru_article } %>
+    <div id="team_players_container">
+      <%= render :partial => "show_team_players", :locals => { :team_type => "Guest", :items => guest_players, :players_rate => players_rate } %>
+      <%= render :partial => "show_team_players", :locals => { :team_type => "Home", :items => home_players, :players_rate => players_rate} %>
+    </div>
+    <div class="btn-line">
+      <%= submit_tag 'Edit', :class=>'btn btn-60' %>
+      <input type="button" class="btn btn-60" value="Cancel" onclick="$('container_for_' + '<%= get_form_id(object) %>').remove();"/>
+    </div>    
+  <% end  %>
+  <div class="bottom-container"><div>&nbsp;</div></div>
+</div>        	            

@@ -1,0 +1,2 @@
+class ArticlePlayersRealRate < ArticlePlayersMatchupRate  
+end

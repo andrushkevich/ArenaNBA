@@ -1,0 +1,27 @@
+<div class="content">
+  <%= render :partial => "current_date" %>
+  <% if @nba_games.size > 0 %>
+  <h1 style="color: White;">NBA</h1>
+  <br/>
+  <ul class="list_scores">
+  <% for game in @nba_games %>
+        <li ><%= render(:partial => "game_score" , :locals => {:game=>game, :is_index=>true}) %></li>   
+  <% end %>
+  </ul>
+  <br/>
+  <% end %>
+  <% if @wnba_games.size > 0 %>
+  <h1 style="color: White;">WNBA</h1>
+  <br/>
+  <ul class="list_scores">
+  <% for game in @wnba_games %>
+        <li ><%= render(:partial => "game_score" , :locals => {:game=>game, :is_index=>true}) %></li>
+  <% end %>
+  </ul>
+  <% end %>
+  <%if @content %>
+  <div class="text_block">
+  <%= @content%>
+  </div>
+  <% end %>
+</div>
